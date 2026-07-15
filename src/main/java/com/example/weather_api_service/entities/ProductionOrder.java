@@ -18,6 +18,7 @@ public class ProductionOrder{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productionOrderId;
 
+
     private String customerName;
     private String productName;
     private Integer quantity;

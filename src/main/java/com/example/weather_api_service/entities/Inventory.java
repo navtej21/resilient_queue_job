@@ -14,7 +14,10 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long inventoryId;
+
+    @Column(name = "availableQuantity")
     private BigDecimal availableQuantity;
+    @Column(name = "lastUpdated")
     private LocalDateTime lastUpdated;
 
     @OneToOne

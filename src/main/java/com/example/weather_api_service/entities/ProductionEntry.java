@@ -2,11 +2,13 @@ package com.example.weather_api_service.entities;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "production_entry")
+@Data
 public class ProductionEntry {
 
     @Id
