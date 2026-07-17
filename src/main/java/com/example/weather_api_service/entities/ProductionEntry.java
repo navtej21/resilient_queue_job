@@ -4,6 +4,7 @@ package com.example.weather_api_service.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Entity

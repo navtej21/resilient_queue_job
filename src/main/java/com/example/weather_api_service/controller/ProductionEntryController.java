@@ -5,6 +5,7 @@ import com.example.weather_api_service.entities.ProductionEntry;
 import com.example.weather_api_service.entities.ProductionOrder;
 import com.example.weather_api_service.repo.ProductionEntryRepo;
 import com.example.weather_api_service.repo.ProductionOrderRepo;
+import com.example.weather_api_service.service.ProductionEntryService;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.apache.bcel.classfile.annotation.RuntimeTypeAnnos;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class ProductionEntryController {
 
     private final ProductionOrderRepo productionOrderRepo;
 
+    private final ProductionEntryService productionEntryService;
+
 
 
 
@@ -32,10 +35,7 @@ public class ProductionEntryController {
         ProductionOrder productionOrder=productionOrderRepo.findById(productionEntryRequest.getProductionId()).orElseThrow(()->{
             throw new RuntimeException("No Product Found");
         });
-        productionEntry.setProductionDate(LocalDate.now());
-        productionEntry.setQuantityProduced(Integer.parseInt(productionEntryRequest.getQuantityProduced()+""));
-        productionEntry.setProductionOrder(productionOrder);
-        productionEntryRepo.save(productionEntry);
+        productionEntryService.garmentProductionEntry(productionEntryRequest);
         return ResponseEntity.ok().body("Created The Production Entry");
     }
 
