@@ -29,7 +29,7 @@ while True:
         block=5000
     )
         if not response:
-            print("skipped",f"{fields["jobId"]}")
+            continue
             
         for stream_name, messages in response:
             for message_id, fields in messages:
@@ -37,11 +37,10 @@ while True:
                 
                 if (r.sismember("processed_ids",fields["jobId"])):
                      print(f"Skipping duplicate job {fields['jobId']}")
-                     continue
                 else:
                     r.sadd("processed_ids",fields["jobId"])
                     time.sleep(1)  # simulate work
-                    r.xack(STREAM, GROUP, message_id)
+                r.xack(STREAM, GROUP, message_id)
                 print(f"Acked {message_id}")
     except redis.exceptions.ResponseError as e:
         print(f"error {e}")
